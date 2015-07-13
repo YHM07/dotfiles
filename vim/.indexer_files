@@ -1,0 +1,6 @@
+[PROJECTS_PARENT]
+# filter="*.cpp *.c *.h"
+option:ctags_params="--languages=c++,c,python,java"
+~/.vimprojects/
+
+# mkdir ~/.indexer_files_tags/ 

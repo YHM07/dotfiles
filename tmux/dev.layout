@@ -1,0 +1,10 @@
+#----------------------------------------------
+# layout
+selectp -t 0		# 选中第0个窗格
+splitw  -h -p 50	# 将其分成左右两个
+# split current pane and run 'vim' command inside the new one
+# splitw  -h -p 50 'vim'	
+selectp -t 1		# 选中第1个，也就是右边的那个
+splitw  -v -p 50	# 将其分成上下两个
+selectp -t 0		# 返回第0个
+
