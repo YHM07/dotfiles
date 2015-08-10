@@ -21,7 +21,7 @@ set helplang       =cn
 set nocompatible					" 关闭 vi 兼容模式
 syntax on							" 自动语法高亮
 " colorscheme molokai				" 设定配色方案
-" colorscheme desert 				" 设定配色方案
+colorscheme desert 				" 设定配色方案
 " 修改注释的颜色
 " hi Comment ctermfg=blue
 " 修改字符串的颜色
@@ -81,6 +81,9 @@ if has("autocmd")
 endif 
 
 " -----------------------------------------------------------------------------
+" set paste                        " 设置vim进入paste模式，粘贴格式不会错乱
+" set nopaste					   " 退出paste模式
+" -----------------------------------------------------------------------------
 " 编程相关设置
 " 代码折叠
 set foldenable 						" 开启折叠
@@ -136,7 +139,7 @@ nnoremap <leader>4 :set filetype=php<CR>
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 autocmd FileType python map <F12> :!python %<CR>
 
-autocmd BufNewFile *.py 0r ~/.vim/bundle/templates/template.py 
+autocmd BufNewFile *.py 0r ~/.vim/templates/python.py 
 autocmd BufNewFile *.py normal G
 
 " 选中状态下 Ctrl+c 复制
@@ -154,9 +157,6 @@ endif
 " -----------------------------------------------------------------------------
 "  < Vundle 插件管理工具配置 >
 " -----------------------------------------------------------------------------
-" Vundle install
-" git clone https://github.com/gmarik/Vundle.vim.git
-" ~/.vim/bundle/Vundle.vim
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -184,12 +184,17 @@ Bundle 'Townk/vim-autoclose'
 Bundle 'mattn/calendar-vim'
 "Bundle 'kakkyz81/evervim'
 "Bundle 'tpope/vim-surround.vim'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'scrooloose/syntastic'
+Bundle 'davidhalter/jedi-vim'
+"Bundle 'SirVer/ultisnips'
+"Bundle 'honza/vim-snippets'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 
 Bundle 'L9'
 Bundle 'DoxygenToolkit.vim'
-Bundle 'NeoComplCache'
+"Bundle 'NeoComplCache'
 Bundle 'omnicppcomplete'
 "Bundle 'SuperTab'
 Bundle 'bash-support.vim'
@@ -300,17 +305,6 @@ au BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.c set omnifunc=omni#cpp#complete#Ma
 "autocmd FileType cpp set omnifunc=cppcomplete#CompleteCPP
 map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>:TlistUpdate<CR>
 "imap <F12> <ESC> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>:TlistUpdate<CR>   
-" 以下命令在终端运行生成tags文件，并放在～/.vim/tags/目录下。然后，设置～/.vimrc文件。
-" 利用以下命令生成/usr/include目录下文件的tags文件
-" cd /usr/include 
-" ctags -R --c-kinds=+l+x+p --fields=+iaSl --extra=+q  -I __THROW,__nonnull
-" -f ~/.vim/tags/sys.tags
-" 
-" 生成c++库文件的tags文件,可以下载c++库文件，或者使用/usr/include/c++/4.8目录文件，然后运行以下命令
-" cd /usr/include/c++/4.8
-" ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q
-" --language-force=c++ -f ~/.vim/tags/stdcpp.tags
-" 以上命令参考：https://github.com/yangyangwithgnu/use_vim_as_ide#5.4.1
 "set nocp
 set omnifunc                    =syntaxcomplete#Complete
 set completeopt                 =menu,menuone	"关掉智能补全时的预览窗口
@@ -400,3 +394,75 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
 " enable additional tools: doxygen tools
 let g:C_UseTool_doxygen = 'yes'
 
+"-------------------------------------------------------------------------
+" plugin - YouCompleteMe.vim 
+" a code-completion engine for vim
+"-------------------------------------------------------------------------
+
+let g:ycm_global_ycm_extra_conf = '~/.vim/templates/ycm/.ycm_extra_conf.py'
+" 不显示开启vim时检查ycm_extra_conf文件的信息  
+let g:ycm_confirm_extra_conf=0
+
+" 开启基于tag的补全，可以在这之后添加需要的标签路径  
+let g:ycm_collect_identifiers_from_tags_files=1
+
+"注释和字符串中的文字也会被收入补全
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+
+" 输入第2个字符开始补全
+let g:ycm_min_num_of_chars_for_completion=2
+
+" 禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_cache_omnifunc=0
+
+" 开启语义补全
+let g:ycm_seed_identifiers_with_syntax=1	
+
+"在注释输入中也能补全
+let g:ycm_complete_in_comments = 1
+
+"在字符串输入中也能补全
+let g:ycm_complete_in_strings = 1
+
+" 设置在下面几种格式的文件上屏蔽ycm
+let g:ycm_filetype_blacklist = {
+			\ 'tagbar' : 1,
+			\ 'nerdtree' : 1,
+			\ 'qf' : 1,
+			\ 'notes' : 1,
+			\ 'markdowm' : 1,
+			\ 'unite' : 1,
+			\ 'text' : 1,
+			\ 'vimwiki' : 1,
+			\ 'gitcommit' : 1,
+			\}
+" youcompleteme  默认tab  s-tab 和 ultisnips 冲突
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+" 修改对C函数的补全快捷键，默认是CTRL + space，修改为ALT +;
+" let g:ycm_key_invoke_completion = '<M-;>'
+
+"上下左右键的行为 会显示其他信息
+" inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+" inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+" inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" :"\<PageDown>"
+" inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>" 
+" 跳转到定义处
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" nnoremap <leader>lo :lopen<CR>	"open locationlist
+" nnoremap <leader>lc :lclose<CR>	"close locationlist
+inoremap <leader><leader> <C-x><C-o>"
+
+"-------------------------------------------------------------------------
+" plugin - syntastic.vim 
+" Syntax checking hacks for vim
+"-------------------------------------------------------------------------
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"let g:syntastic_ignore_files=[".*\.py$"]
