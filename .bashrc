@@ -132,3 +132,5 @@ alias pandoc="pandoc --template=$HOME/Templates/template.tex --latex-engine=xela
 # history
 # export HISTTIMEFORMAT="%d/%m/%y %T "
 
+# force tmux to assume the terminal supports 256 colour
+alias tmux='tmux -2'
