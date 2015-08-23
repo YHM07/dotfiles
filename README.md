@@ -26,5 +26,12 @@
 
   * 该配置添加了*indexer.tar.gz*，该文件需要读取*~/.indexer_files*,并且默认生成的*tags*文件存放在*~/.indexer_files_tags/*目录下，因此，需要生成*~/.indexer_files*,创建目录*~/.indexer_files_tag*.另外，工程文件默认存放在*~/.vimprojects*目录下，因此可以创建该目录，然后设置工程项目的软链接到该目录下边，或者参考说明自定义目录。
 
+4. vim与tmux颜色配置
+
+- 在~/.bashrc 中添加 `alias tmux='tmux -2'`
+
+- 使配置生效: `$ source ~/.bashrc`
+
+- 在~/.tmux.conf 中添加 `set -g default-terminal "screen-256color"`
 	
 	
