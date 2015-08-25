@@ -6,6 +6,15 @@ author: H.M.Yang(hmyang07@gmail.com)
 
 	该插件采用GFM-markdown语法高亮
 
+2. 添加插件: **itchyny/calendar.vim**
+
+	该插件具有日历功能，同时可以创建事件，以及todo列表;
+
+3. 注释掉日历插件： **mattn/calendar-vim**
+
+	该插件搭配vimwiki可以搭建自定义博客,这里与上述第二个插件冲突，故暂时注释掉。
+	
+
 revision: 08/23/2015
 
 author: H.M.Yang(hmyang07@gmail.com)
