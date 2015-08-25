@@ -29,16 +29,15 @@
 
 4. **vim与tmux颜色配置**
 
-- 在~/.bashrc 中添加 `alias tmux='tmux -2'`
+	- 在~/.bashrc 中添加 `alias tmux='tmux -2'`
 
-- 使配置生效: `$ source ~/.bashrc`
+	- 使配置生效: `$ source ~/.bashrc`
 
-- 在~/.tmux.conf 中添加 `set -g default-terminal "screen-256color"`
+	- 在~/.tmux.conf 中添加 `set -g default-terminal "screen-256color"`
 
 5. **关于~/.vimrc版本控制的说明**
-    将**~/.vimrc 以及 ~/.vim**设置为符号链接，分别指向**~/github/setup.git/vim**目录的**.vimrc以及.vim**，然后利用github进行管理。
-	其中的**.vim**文件夹不接受版本系统的控制。
+	将**~/.vimrc 以及 ~/.vim**设置为符号链接，分别指向**~/github/setup.git/vim**目录的**.vimrc以及.vim**，然后利用github进行管理。其中的**.vim**文件夹不接受版本系统的控制。
 	
 6. **关于~/.tmux.conf版本控制的说明**
-    将**~/.tmux.conf以及 ~/.tmux**设置为符号链接，分别指向**~/github/setup.git/tmux**目录的**.tmux.conf以及.tmux**，然后利用github进行管理。
+ 	将**~/.tmux.conf以及 ~/.tmux**设置为符号链接，分别指向**~/github/setup.git/tmux**目录的**.tmux.conf以及.tmux**，然后利用github进行管理。
 	
