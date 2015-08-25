@@ -1,16 +1,21 @@
-" -----------------------------------------------------------------------------
+" ------------------------------------------------------------------------
 "
-" 	FileName: .vimrc
-" 	Version:   1.0
-" 	Created:   10/27/2014
-" 	Revision:  None
-" 	Author:    H.M.Yang,(hmyang07@gmail.com)
+" @file: .vimrc
+" @brief vim config file
+" @author H.M.Yang,hmyang07@gmail.com
+" @version v2.0
+" @date 10/27/2014
+" @revision 08/25/2015 @REMEAD.md
 "
-" -----------------------------------------------------------------------------
+" ------------------------------------------------------------------------
 
-" =============================================================================
+" ========================================================================
 "                          << 以下为软件默认配置 >>
-" =============================================================================
+" ========================================================================
+" 修改leader键
+" let mapleader = ','
+" let g:mapleader = ','
+
 " 编码
 set encoding       =utf-8			" UTF-8 编码
 set termencoding   =utf-8
@@ -21,7 +26,7 @@ set helplang       =cn
 set nocompatible					" 关闭 vi 兼容模式
 syntax on							" 自动语法高亮
 " colorscheme molokai				" 设定配色方案
-colorscheme desert 				" 设定配色方案
+" colorscheme desert 				" 设定配色方案
 " 修改注释的颜色
 " hi Comment ctermfg=blue
 " 修改字符串的颜色
@@ -36,9 +41,8 @@ colorscheme desert 				" 设定配色方案
 " hi Statement ctermfg = darkyellow
 " 修改下拉菜单颜色
 hi Pmenu ctermfg = 0 ctermbg = 5 guibg = LightMagenta
-" 修改下拉菜单选中条目颜色
-hi PmenuSel ctermfg = 0 ctermbg = 7 guibg = Gray
-
+" 修改下拉菜单选中条目颜色 
+hi PmenuSel ctermfg = 0 ctermbg = 7 guibg = Gray 
 set number							" 显示行号
 set cursorline 						" 突出显示当前行
 " 设置缩进
@@ -80,11 +84,10 @@ if has("autocmd")
 	  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif 
 
-" -----------------------------------------------------------------------------
+" ------------------------------------------------------------------------
 " set paste                        " 设置vim进入paste模式，粘贴格式不会错乱
 " set nopaste					   " 退出paste模式
-" -----------------------------------------------------------------------------
-" 编程相关设置
+" ------------------------------------------------------------------------ " 编程相关设置
 " 代码折叠
 set foldenable 						" 开启折叠
 set foldmethod =syntax 				" 设置语法折叠
@@ -142,21 +145,13 @@ autocmd FileType python map <F12> :!python %<CR>
 autocmd BufNewFile *.py 0r ~/.vim/templates/python.py 
 autocmd BufNewFile *.py normal G
 
-" 选中状态下 Ctrl+c 复制
-vmap <C-c> "+y
-
-" tmux 配色方案
-if exists('$TMUX')
-	set term=screen-256color
-endif
-
-" =============================================================================
+" =========================================================================
 "                          << 以下为用户自定义配置 >>
-" =============================================================================
+" =========================================================================
 
-" -----------------------------------------------------------------------------
+" ------------------------------------------------------------------------
 "  < Vundle 插件管理工具配置 >
-" -----------------------------------------------------------------------------
+" ------------------------------------------------------------------------
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -175,7 +170,6 @@ Bundle 'gmarik/Vundle.vim'
 "
 Bundle 'scrooloose/nerdtree'
 Bundle 'Lokaltog/vim-powerline'
-"Bundle 'vimscript/c-support'
 Bundle 'WolfgangMehner/c.vim'
 "Bundle 'vim-scripts/Vim-Markdown-Preview'
 Bundle 'Kris2k/minibufexpl.vim'
@@ -183,12 +177,12 @@ Bundle 'Townk/vim-autoclose'
 "Bundle 'terryma/vim-multiple-cursors'
 Bundle 'mattn/calendar-vim'
 "Bundle 'kakkyz81/evervim'
-"Bundle 'tpope/vim-surround.vim'
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'davidhalter/jedi-vim'
-"Bundle 'SirVer/ultisnips'
-"Bundle 'honza/vim-snippets'
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
+Bundle 'ctrlpvim/ctrlp.vim'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 
@@ -240,9 +234,9 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" =============================================================================
+" ========================================================================
 "                          << 以下为常用插件配置 >>
-" =============================================================================
+" ========================================================================
 
 "-------------------------------------------------------------------------
 " plugin - NERD_tree.vim 
@@ -305,6 +299,18 @@ au BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.c set omnifunc=omni#cpp#complete#Ma
 "autocmd FileType cpp set omnifunc=cppcomplete#CompleteCPP
 map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>:TlistUpdate<CR>
 "imap <F12> <ESC> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>:TlistUpdate<CR>   
+"
+" 以下命令在终端运行生成tags文件，并放在～/.vim/tags/目录下。然后，设置～/.vimrc文件。
+" 利用以下命令生成/usr/include目录下文件的tags文件
+"  cd /usr/include 
+"  ctags -R --c-kinds=+l+x+p --fields=+iaSl --extra=+q  -I __THROW,__nonnull -f ~/.vim/tags/sys.tags
+" 
+" 生成c++库文件的tags文件,可以下载c++库文件，或者使用/usr/include/c++/4.8目录文件，然后运行以下命令
+" cd /usr/include/c++/4.8
+" ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q
+" --language-force=c++ -f ~/.vim/tags/stdcpp.tags
+" 以上说明参考：https://github.com/yangyangwithgnu/use_vim_as_ide#5.4.1
+"
 "set nocp
 set omnifunc                    =syntaxcomplete#Complete
 set completeopt                 =menu,menuone	"关掉智能补全时的预览窗口
@@ -322,13 +328,6 @@ let OmniCpp_ShowAccess          = 1
 au  CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set tags+=~/.vim/tags/stdcpp.tags
 set tags+=~/.vim/tags/sys.tags
-"-------------------------------------------------------------------------
-
-"-------------------------------------------------------------------------
-" plugin - supertab.vim 
-"-------------------------------------------------------------------------
-"let g:SuperTabRetainCompletionType  = 2
-"let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 "-------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------
@@ -354,8 +353,8 @@ source /usr/share/vim/vim74/ftplugin/man.vim
 set showcmd 						" 显示命令
 set guifont=PowerlineSymbols\ for\ Powerline
 set t_Co=256
-let g:Powerline_symblos = 'fancy'
-"let g:Powerline_symblos = 'unicode'
+"let g:Powerline_symblos = 'fancy'
+let g:Powerline_symblos = 'unicode'
 "-------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------
@@ -383,9 +382,9 @@ let Tlist_Compact_Format       = 1
 " plugin - vimwiki.vim 
 " personal wiki 
 "-------------------------------------------------------------------------
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-\'path_html': '~/vimwiki/vimwiki_html',
-\'html_header': '',}]
+"let g:vimwiki_list = [{'path': '~/vimwiki/',
+"\'path_html': '~/vimwiki/vimwiki_html',
+"\'html_header': '',}]
 
 "-------------------------------------------------------------------------
 " plugin - c.vim 
@@ -442,11 +441,6 @@ let g:ycm_key_list_previous_completion = ['<Up>']
 " 修改对C函数的补全快捷键，默认是CTRL + space，修改为ALT +;
 " let g:ycm_key_invoke_completion = '<M-;>'
 
-"上下左右键的行为 会显示其他信息
-" inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-" inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-" inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" :"\<PageDown>"
-" inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>" 
 " 跳转到定义处
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " nnoremap <leader>lo :lopen<CR>	"open locationlist
@@ -460,9 +454,27 @@ inoremap <leader><leader> <C-x><C-o>"
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
+" 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-"let g:syntastic_ignore_files=[".*\.py$"]
+
+"-------------------------------------------------------------------------
+" plugin - ctrlp.vim 
+" Fuzzy file,buffer,mru,tag,etc finder.
+"-------------------------------------------------------------------------
+"let g:ctrlp_map = '<leader>p'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+map <leader>f :CtrlPMRU<CR>
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_match_window_bottom=1
+let g:ctrlp_max_height=15
+let g:ctrlp_match_window_reversed=0
+let g:ctrlp_mruf_max=500
+let g:ctrlp_follow_symlinks=1
