@@ -1,4 +1,5 @@
 revision: 08/23/2015
+
 author: H.M.Yang(hmyang07@gmail.com)
 
 **关于vim配置文件~/.vimrc的说明**
