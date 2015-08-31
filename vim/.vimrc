@@ -172,6 +172,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'WolfgangMehner/c.vim'
 "Bundle 'vim-scripts/Vim-Markdown-Preview'
+Bundle 'jtratner/vim-flavored-markdown'
 Bundle 'Kris2k/minibufexpl.vim'
 Bundle 'Townk/vim-autoclose'
 "Bundle 'terryma/vim-multiple-cursors'
@@ -430,7 +431,7 @@ let g:ycm_filetype_blacklist = {
 			\ 'nerdtree' : 1,
 			\ 'qf' : 1,
 			\ 'notes' : 1,
-			\ 'markdowm' : 1,
+			\ 'markdown' : 1,
 			\ 'unite' : 1,
 			\ 'text' : 1,
 			\ 'vimwiki' : 1,
