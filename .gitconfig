@@ -7,6 +7,7 @@
 	tool = vimdiff
 [alias]
 	ll = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset' --decorate --abbrev-commit --max-count=20
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
     l  = log --stat --decorate --abbrev-commit --max-count=3
 	st = status -sb
 	ci = commit
@@ -16,5 +17,4 @@
 	pl = pull
 	unstage = reset HEAD --
 	last = log -1 HEAD
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 	
