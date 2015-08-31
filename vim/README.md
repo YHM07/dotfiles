@@ -2,7 +2,7 @@ revision: 08/25/2015
 
 author: H.M.Yang(hmyang07@gmail.com)
 
-1. 添加插件：**vim-flavored-markdown**
+1. 添加插件：**jtratner/vim-flavored-markdown**
 
 	该插件采用GFM-markdown语法高亮
 
