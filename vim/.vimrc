@@ -173,7 +173,7 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'WolfgangMehner/c.vim'
 "Bundle 'vim-scripts/Vim-Markdown-Preview'
 Bundle	'jtratner/vim-flavored-markdown'
-Bundle 'suan/vim-instant-markdown'
+"Bundle 'suan/vim-instant-markdown'
 Bundle 'Kris2k/minibufexpl.vim'
 Bundle 'Townk/vim-autoclose'
 "Bundle 'terryma/vim-multiple-cursors'
@@ -183,6 +183,7 @@ Bundle 'itchyny/calendar.vim'
 "Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'davidhalter/jedi-vim'
+Bundle 'rkulla/pydiction'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
 Bundle 'ctrlpvim/ctrlp.vim'
@@ -489,3 +490,9 @@ augroup markdown
 	au!
 	au BufNewFile,BufRead *.md,*.markdown, setlocal filetype=ghmarkdown
 augroup END
+"-----------------------------------------------------------------
+" plugin - pydiction
+" Python Tab-completion for VIM
+"-----------------------------------------------------------------
+let g:pydiction_location    = '~/.vim/bundle/pydiction/complete-dict'
+let g:pydiction_menu_height = 8
