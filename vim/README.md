@@ -1,3 +1,10 @@
+revision: 09/01/2015
+
+author: H.M.Yang(hmyang07@gmail.com)
+
+1. 添加插件"rkulla/pydiction"以及配置
+
+
 revision: 08/25/2015
 
 author: H.M.Yang(hmyang07@gmail.com)
