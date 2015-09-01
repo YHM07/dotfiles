@@ -3,7 +3,7 @@
 " @file: .vimrc
 " @brief vim config file
 " @author H.M.Yang,hmyang07@gmail.com
-" @version v2.0
+" @version v2.3
 " @date 10/27/2014
 " @revision 08/25/2015 @REMEAD.md
 "
