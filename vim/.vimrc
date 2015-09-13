@@ -290,9 +290,9 @@ let g:NeoComplCache_SkipInputTime             = '0.5'
 let g:NeoComplCache_SnippetsDir               = $VIMFILES.'/snippets'
 " <TAB> completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-" snippets expand key
-imap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
-smap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
+"" snippets expand key
+" imap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
+" smap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
 "-------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------
