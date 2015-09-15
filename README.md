@@ -12,7 +12,9 @@
 
 * 插件安装
 
+```
 	:BundleInstall
+```
 
 ## 对个别文件的使用说明
 
@@ -47,12 +49,16 @@
 将**~/.tmux.conf以及 ~/.tmux**设置为符号链接，分别指向**~/github/setup.git/tmux**目录的**.tmux.conf以及.tmux**，然后利用github进行管理。
 	
 
-7. **ctags安装**
+## ctags安装
 
-ubuntu
+- ubuntu
 
+```
 	sudo apt-get install exuberant-ctags
+```
 
-centos
+- centos
 
+```
 	sudo yum install ctags-etags
+```
