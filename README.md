@@ -1,8 +1,8 @@
 # Linux 配置文件 #
 
-## 关于setup.git的说明
+## 关于dotfiles.git的说明
 
-*setup*存储的是个人常用到一些配置文件，比如vim的～/.vimrc文件，以及tmux的.tmux.conf文件。可以任意clone，如果使用过程当中出现任何问题，欢迎讨论。
+*dotfiles.git*存储的是个人常用到一些配置文件，比如vim的～/.vimrc文件，以及tmux的.tmux.conf文件。可以任意clone，如果使用过程当中出现任何问题，欢迎讨论。
 
 ## 关于Vundle管理vim插件
 
@@ -12,7 +12,9 @@
 
 * 插件安装
 
+```
 	:BundleInstall
+```
 
 ## 对个别文件的使用说明
 
@@ -49,10 +51,14 @@
 
 ## ctags安装
 
-ubuntu
+- ubuntu
 
+```
 	sudo apt-get install exuberant-ctags
+```
 
-centos
+- centos
 
+```
 	sudo yum install ctags-etags
+```
