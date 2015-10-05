@@ -187,6 +187,8 @@ Bundle 'rkulla/pydiction'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
 Bundle 'ctrlpvim/ctrlp.vim'
+"Html
+Bundle 'mattn/emmet-vim'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 
