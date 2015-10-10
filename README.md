@@ -20,15 +20,15 @@
 
 * 该配置添加了*a.vim*插件，打开c程序文件\*.c的时候总会出现错误提示：
 
-> **Mapping already in use: "\<LocalLeader\>is", mode "n"**
+> Mapping already in use: "\<LocalLeader\>is", mode "n"
 
-> **Mapping already in use: "\<LocalLeader\>is", mode "i"**
+> Mapping already in use: "\<LocalLeader\>is", mode "i"
 
 解决方案： 注释掉*a.vim*中的
 
-> **imap \<Leader\>is \<ESC\>:IHS\<CR\>:A\<CR\>**
+> imap \<Leader\>is \<ESC\>:IHS\<CR\>:A\<CR\>
 
-> **nmap \<Leader\>is :IHS\<CR\>:A\<CR\>**
+> nmap \<Leader\>is :IHS\<CR\>:A\<CR\>
 
 * 该配置添加了*indexer.tar.gz*，该文件需要读取*~/.indexer_files*,并且默认生成的*tags*文件存放在*~/.indexer_files_tags/*目录下，因此，需要生成*~/.indexer_files*,创建目录*~/.indexer_files_tag*.另外，工程文件默认存放在*~/.vimprojects*目录下，因此可以创建该目录，然后设置工程项目的软链接到该目录下边，或者参考说明自定义目录。
 
@@ -42,11 +42,11 @@
 
 ## 关于~/.vimrc版本控制的说明
 
-将**~/.vimrc 以及 ~/.vim**设置为符号链接，分别指向**~/github/setup.git/vim**目录的**.vimrc以及.vim**，然后利用github进行管理。其中的**.vim**文件夹不接受版本系统的控制。
+将**~/.vimrc 以及 ~/.vim**设置为符号链接，分别指向**~/dotfiles.git/vim**目录的**.vimrc以及.vim**，然后利用github进行管理。其中的**.vim**文件夹不接受版本系统的控制。
 	
 ## 关于~/.tmux.conf版本控制的说明
 
-将**~/.tmux.conf以及 ~/.tmux**设置为符号链接，分别指向**~/github/setup.git/tmux**目录的**.tmux.conf以及.tmux**，然后利用github进行管理。
+将**~/.tmux.conf以及 ~/.tmux**设置为符号链接，分别指向**~/dotfiles.git/tmux**目录的**.tmux.conf以及.tmux**，然后利用github进行管理。
 	
 
 ## ctags安装
