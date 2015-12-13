@@ -3,6 +3,7 @@
 	email = yangheming55@126.com
 [core]
 	editor = vim
+	quotepath = false
 [merge]
 	tool = vimdiff
 [alias]
