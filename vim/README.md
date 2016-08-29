@@ -1,3 +1,9 @@
+revision: 08/29/2016
+
+author: H.M.Yang(hmyang07@gmail.com)
+
+1. 添加插件"mileszs/ack.vim"以及配置
+
 revision: 09/01/2015
 
 author: H.M.Yang(hmyang07@gmail.com)

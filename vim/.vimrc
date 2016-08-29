@@ -189,6 +189,7 @@ Bundle 'honza/vim-snippets'
 Bundle 'ctrlpvim/ctrlp.vim'
 "Html
 Bundle 'mattn/emmet-vim'
+Bundle 'mileszs/ack.vim'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 
@@ -498,3 +499,11 @@ augroup END
 "-----------------------------------------------------------------
 let g:pydiction_location    = '~/.vim/bundle/pydiction/complete-dict'
 let g:pydiction_menu_height = 8
+
+"-----------------------------------------------------------------
+" plugin - ack.vim
+" A code searching tool, ack, ag
+"-----------------------------------------------------------------
+if executable('ag')
+	  let g:ackprg = 'ag --vimgrep'
+endif
