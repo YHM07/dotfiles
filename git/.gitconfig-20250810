@@ -1,0 +1,67 @@
+[core]
+	longpaths = true
+	editor = vim
+[color]
+    ui = true
+[alias]
+	st = status
+	co = checkout
+	ci = commit
+	# br = branch
+	br = branch --sort=-committerdate
+	unstage = reset HEAD
+	last = log -1 HEAD
+	# lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit
+	log = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	# lga = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+	lga = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+	# lgs = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --stat
+	lgs = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --abbrev-commit --stat
+	# lgs = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit --stat
+	dt = difftool
+	cp = cherry-pick
+	# cpa = cherry-pick --abort
+	# cpc = cherry-pick --continue
+	up = update-index # --assume-unchanged; --no-assume-unchanged
+	sta = stash save
+	stl = stash list
+	stp = stash pop
+	sts = stash show # --text,-p
+	stc = stash clear
+	stu = stash --include-untracked
+	geturl = config --get remote.origin.url
+	brc = branch -a --contains
+	recent = "!r() { count=$1; git for-each-ref --sort=-committerdate refs/heads --format='%(HEAD)%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:blue)%(subject)|%(color:magenta)%(authorname)%(color:reset)' --count=${count:=10} | column -ts'|';}; r"
+	recentb = "!r() { refbranch=$1 count=$2; git for-each-ref --sort=-committerdate refs/heads --format='%(refname:short)|%(HEAD)%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:blue)%(subject)|%(color:magenta)%(authorname)%(color:reset)'  --count=${count:-10} | while read line; do branch=$(echo \"$line\" | awk 'BEGIN { FS = \"|\" }; { print $1 }' | tr -d '*'); ahead=$(git rev-list --count \"${refbranch:-origin/master}..${branch}\"); behind=$(git rev-list --count \"${branch}..${refbranch:-origin/master}\"); colorline=$(echo \"$line\" | sed 's/^[^|]*|//'); echo \"$ahead|$behind|$colorline\" | awk -F'|' -vOFS='|' '{$5=substr($5,1,70)}1' ; done | ( echo \"ahead|behind||branch|lastcommit|message|author\\n\" && cat) | column -ts'|';}; r"
+	root = rev-parse --show-toplevel
+	conflicts = !git ls-files -u | cut -f 2 | sort -u
+	# conflicts = diff --name-only --diff-filter=U
+	# conflicts = diff --check
+	# conflicts = !git diff --name-only --diff-filter=U | grep -oE '[^/ ]+$'
+	blame = blame --date='format:%Y-%m-%d %H:%M:%S'
+	history = blame --date='format:%Y-%m-%d %H:%M:%S'
+	bc = rev-parse --abbrev-ref HEAD
+	current-branch = symbolic-ref --short HEAD
+
+[user]
+	name = YHM07
+	email = hmyang07@gmail.com
+[push]
+	default = matching
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[log]
+	# date = format:%c
+	date = format:%Y-%m-%d %H:%M:%S
+[branch]
+	# sort = -committerdate
+[safe]
+	directory = /home/driver/dnx_init_tm/git_store/sdk-all-6.5.28

@@ -1,0 +1,680 @@
+" ------------------------------------------------------------------------
+"
+" @file: .vimrc
+" @brief vim config file
+" @author H.M.Yang,hmyang07@gmail.com
+" @version v2.3
+" @date 10/27/2014
+" @revision 08/25/2015 @REMEAD.md
+"
+" ------------------------------------------------------------------------
+
+" ========================================================================
+"                          << 以下为软件默认配置 >>
+" ========================================================================
+" 修改leader键
+" let mapleader = ','
+" let g:mapleader = ','
+
+" 编码
+set encoding       =utf-8			" UTF-8 编码
+set termencoding   =utf-8
+set formatoptions +=mM
+set fencs          =utf-8,gbk
+set helplang       =cn
+
+set nocompatible					" 关闭 vi 兼容模式
+syntax on							" 自动语法高亮
+" colorscheme molokai				" 设定配色方案
+" colorscheme desert 				" 设定配色方案
+" 修改注释的颜色
+" hi Comment ctermfg=blue
+" 修改字符串的颜色
+" hi String ctermfg = darkred
+" 修改类型颜色
+" hi Type ctermfg = yellow
+" 修改数字颜色
+" hi Number ctermfg = darkblue
+" 修改常量颜色
+" hi Constant ctermfg = blue
+" 修改声明颜色
+" hi Statement ctermfg = darkyellow
+" 修改下拉菜单颜色
+hi Pmenu ctermfg = 0 ctermbg = 5 guibg = LightMagenta
+" 修改下拉菜单选中条目颜色 
+hi PmenuSel ctermfg = 0 ctermbg = 7 guibg = Gray 
+set number							" 显示行号
+" set relativenumber					" 显示相对行号
+set cursorline 						" 突出显示当前行
+" 设置缩进
+set shiftwidth  =4 					" 设定 << 和 >> 命令移动时的宽度为 4
+set softtabstop =4 					" 使得按退格键时可以一次删掉 4 个空格
+set tabstop     =4 					" 设定 tab 长度为 4
+" 备份设置
+set nobackup 						" 覆盖文件时不备份
+set autochdir 						" 自动切换当前目录为当前文件所在的目录
+set backupcopy =yes 				" 设置备份时的行为为覆盖
+" 搜索设置
+set ignorecase 						" 搜索时忽略大小写
+set smartcase						" 但在有一个或以上大写字母时仍保持对大小写敏感
+set nowrapscan 						" 禁止在搜索到文件两端时重新搜索
+set incsearch 						" 输入搜索内容时就显示搜索结果
+set hlsearch 						" 搜索时高亮显示被找到的文本
+" 设置静音模式
+set noerrorbells 					" 关闭错误信息响铃
+set novisualbell 					" 关闭使用可视响铃代替呼叫
+set t_vb=							" 置空错误铃声的终端代码
+" 括号匹配
+" set showmatch 					" 插入括号时，短暂地跳转到匹配的对应括号
+" set matchtime = 2 				" 短暂跳转到匹配括号的时间
+set magic							" 设置魔术
+set hidden							" 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
+set guioptions-=T 					" 隐藏工具栏
+set guioptions-=m 					" 隐藏菜单栏
+set smartindent 					" 开启新行时使用智能自动缩进
+set backspace=indent,eol,start		" 不设定在插入状态无法用退格键和 Delete 键删除回车符
+" 设置状态栏，这一部分放在Powerline后边，不然状态栏命令不显示
+set ruler							" 打开状态栏标尺
+set showcmd 						" 显示命令
+set cmdheight=1 					" 设定命令行的行数为 1
+" 设置在状态行显示的信息
+set laststatus =2 					" 显示状态栏 (默认值为 1, 无法显示状态栏)
+set wildmenu
+set statusline =\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\ 
+
+" 打开文件时自动跳转到关闭文件时，光标所在位置
+if has("autocmd")
+	  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif 
+
+" ------------------------------------------------------------------------
+" set paste                         " 设置vim进入paste模式，粘贴格式不会错乱
+" set nopaste						" 退出paste模式
+" ------------------------------------------------------------------------ " 编程相关设置
+" 代码折叠
+set foldenable						" 开启折叠
+set foldmethod =syntax 				" 设置语法折叠
+set foldcolumn =0					" 设置折叠区域的宽度
+setlocal foldlevel =1          		" 设置折叠层数
+" set foldclose =all 				" 设置为自动关闭折叠
+" 用空格键来开关折叠 
+" nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+set completeopt =longest,menu		" 关掉只能补全时的预览窗口
+filetype plugin indent on      		" 打开智能补全
+
+"窗口分割时,进行切换的按键热键需要连接两次,比如从下方窗口移动
+"光标到上方窗口,需要<c-w><c-w>k,非常麻烦,现在重映射为<c-k>,切换的
+"时候会变得非常方便.
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+"一些不错的映射转换语法（如果在一个文件中混合了不同语言时有用）
+nnoremap <leader>1 :set filetype=xhtml<CR>
+nnoremap <leader>2 :set filetype=css<CR>
+nnoremap <leader>3 :set filetype=javascript<CR>
+nnoremap <leader>4 :set filetype=php<CR>
+
+" set fileformats=unix,dos,mac
+" nmap <leader>fd :se fileformat=dos<CR>
+" nmap <leader>fu :se fileformat=unix<CR>
+
+" quickfix 快捷键映射
+" use Ctrl+x+[l|n|p|cc] to list|next|previous|jump to count the result
+map <C-x>l <ESC>:cl<CR>
+map <C-x>n <ESC>:cn<CR>
+map <C-x>p <ESC>:cp<CR>
+map <C-x>c <ESC>:cc<CR>
+
+" Python 文件的一般设置，比如不要 tab 等
+autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
+autocmd FileType python map <F12> :!python %<CR>
+
+autocmd BufNewFile *.py 0r ~/.vim/templates/python.py 
+autocmd BufNewFile *.py normal G
+
+
+" =========================================================================
+"                          << 以下为用户自定义配置 >>
+" =========================================================================
+map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>:TlistUpdate<CR>
+"imap <F12> <ESC> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>:TlistUpdate<CR>   
+"
+" 以下命令在终端运行生成tags文件，并放在～/.vim/tags/目录下。然后，设置～/.vimrc文件。
+" 利用以下命令生成/usr/include目录下文件的tags文件
+"  cd /usr/include 
+"  ctags -R --c-kinds=+l+x+p --fields=+iaSl --extra=+q  -I __THROW,__nonnull -f ~/.vim/tags/sys.tags
+" 
+" 生成c++库文件的tags文件,可以下载c++库文件，或者使用/usr/include/c++/4.8目录文件，然后运行以下命令
+" cd /usr/include/c++/4.8
+" ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q
+" ctags -R --c++-kinds=+p --fields=+iaS --extra=+q . 
+" --language-force=c++ -f ~/.vim/tags/stdcpp.tags
+" 以上说明参考：https://github.com/yangyangwithgnu/use_vim_as_ide#5.4.1
+
+set tags=./.tags;,.tags
+"set tags+=~/fosv5/brn_5G_fos_v5/src/tags
+"set tags+=/home/yanfa/hmyang5828/.cache/tags/fosv5/fosv5.tags
+"set tags+=/home/yanfa/hmyang5828/.cache/tags/brn_5G_fos_v5/qumpp.tags 
+"-------------------------------------------------------------------------
+
+" ========================================================================
+"                          << 以下为常用插件配置 >>
+" ========================================================================
+"
+" ------------------------------------------------------------------------
+"  < Vundle 插件管理工具配置 >
+" ------------------------------------------------------------------------
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+" call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+" Plugin 'gmarik/Vundle.vim'
+Bundle 'gmarik/Vundle.vim'
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+
+"
+
+" ------------------------------------------------------------------------
+" plug: 文本对齐
+" ------------------------------------------------------------------------
+Plugin 'junegunn/vim-easy-align'
+
+"-------------------------------------------------------------------------
+" plugin - NERD_tree.vim 
+" 以树状方式浏览系统中的文件和目录
+" :NERDtree 打开NERD_tree :NERDtreeClose 关闭NERD_tree
+" o 打开关闭文件或者目录 t 在标签页中打开
+" T 在后台标签页中打开 ! 执行此文件
+" p 到上层目录 P 到根目录
+" K 到第一个节点 J 到最后一个节点
+" u 打开上层目录 m 显示文件系统菜单（添加、删除、移动操作）
+" r 递归刷新当前目录 R 递归刷新当前根目录
+"-------------------------------------------------------------------------
+Plugin 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+
+" <F3> NERD_tree切换
+map  <F3> :NERDTreeToggle<CR>
+imap <F3> <ESC>:NERDTreeToggle<CR>
+
+"-------------------------------------------------------------------------
+
+"-------------------------------------------------------------------------
+" plugin - taglist.vim 
+" 查看函数列表等
+"-------------------------------------------------------------------------
+Plugin 'vim-scripts/taglist.vim', {'on': 'TlistToggle'}
+
+set autochdir
+"TagList(ctags)
+"------------------------------------------------------------------
+nnoremap <silent><F4> :TlistToggle<CR>
+let Tlist_Show_One_File        = 1		 " 不同时显示多个文件的tag，只显示当前文件的
+let Tlist_Exit_OnlyWindow      = 1       " 如果taglist窗口是最后一个窗口，则退出vim
+let Tlist_Use_Right_Window     = 1		 " 在右侧窗口中显示taglist窗口
+let Tlist_File_Fold_Auto_Close = 1 	     " 自动折叠当前非编辑文件的方法列表
+let Tlist_Auto_Open			   = 0
+let Tlist_Auto_Update		   = 1
+let Tlist_Hightlight_Tag_On_BufEnter = 1
+let Tlist_Enable_Fold_Column   = 0
+let Tlist_Process_File_Always  = 1
+let Tlist_Display_Prototype    = 0
+let Tlist_Compact_Format       = 1
+" let Tlist_Ctags_Cmd = '/home/yanfa/hmyang5828/.local/bin/bin/ctags'
+"-------------------------------------------------------------------------
+
+
+"-------------------------------------------------------------------------
+" plugin - indexer 
+" 实时生成标签信息,以下三个插件需要全部安装
+"-------------------------------------------------------------------------
+" Plug 'vim-scripts/indexer.tar.gz'
+" Plug 'vim-scripts/Vimprj'
+" Plug 'vim-scripts/DfrankUtil'
+
+"-------------------------------------------------------------------------
+
+"-------------------------------------------------------------------------
+" plugin - vim-gutentags 
+" 实时生成标签信息,以下三个插件需要全部安装
+"-------------------------------------------------------------------------
+Plugin 'ludovicchabant/vim-gutentags'   
+
+" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+
+" 所生成的数据文件的名称
+let g:gutentags_ctags_tagfile = '.tags'
+
+" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+
+" 配置 ctags 的参数
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+"-------------------------------------------------------------------------
+" plugin - c.vim 
+" C/C++ IDF for vim 
+"-------------------------------------------------------------------------
+Plugin 'WolfgangMehner/c.vim'
+
+" enable additional tools: doxygen tools
+let g:C_UseTool_doxygen = 'yes'
+"-------------------------------------------------------------------------
+
+"-------------------------------------------------------------------------
+" plugin - DoxygenToolkit.vim 
+" 由注释生成文档，并且能够快速生成函数标准注释
+"-------------------------------------------------------------------------
+Plugin 'vim-scripts/DoxygenToolkit.vim'
+
+let g:DoxygenToolkit_authorName            = "H.M.Yang,hmyang07@gmail.com"
+let g:DoxygenToolkit_briefTag_funcName     = "yes"
+let g:DoxygenToolkit_undocTag              = "DOXIGEN_SKIP_BLoCK"
+let g:DoxygenToolkit_briefTag_pre          = "@brief  "
+let g:DoxygenToolkit_paramTag_pre          = "@param  "
+let g:DoxygenToolkit_returnTag             = "@return  "
+let g:DoxygenToolkit_maxFunctionProtoLines = 30
+"let g:DoxygenToolkit_blockHeader="-------------------------------------------------------------------------"
+"let g:DoxygenToolkit_blockFooter="-------------------------------------------------------------------------"
+map <leader>da :DoxAuthor<CR>
+map <leader>df :Dox<CR>
+map <leader>db :DoxBlock<CR>
+"-------------------------------------------------------------------------
+
+
+"-------------------------------------------------------------------------
+" plugin - vim-scripts/AutoComplPop, vim-scripts/omnicppcomplete
+" 自动补全插件
+"-------------------------------------------------------------------------
+Plugin 'vim-scripts/AutoComplPop'
+Plugin 'vim-scripts/omnicppcomplete'
+
+au BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.c set omnifunc=omni#cpp#complete#Main
+"autocmd FileType cpp set omnifunc=cppcomplete#CompleteCPP
+"
+"set nocp
+set omnifunc                    =syntaxcomplete#Complete
+set completeopt                 =menu,menuone	"关掉智能补全时的预览窗口
+let OmniCpp_MayComlpeteDot      = 1 			"autocomplete with .
+let OmniCpp_MayCompleteArrow    = 1 			" autocomplete with ->
+let OmniCpp_MayCompleteScope    = 1 			" autocomplete with ::
+let OmniCpp_SelectFirstItem     = 2 			" select first item (but don't insert)
+let OmniCpp_NamespaceSearch     = 1 			" search namespaces in this and included files
+let OmniCpp_ShowPrototypeInAbbr = 1 			" show function prototype in popup window
+let OmniCpp_GlobalScopeSearch   = 1 			" enable the global scope search
+let OmniCpp_DisplayMode         = 1 			" Class scope completion mode: always show all members
+let OmniCpp_DefaultNamespaces   = ["std","_GLIBCXX_STD"]
+let OmniCpp_ShowScopeInAbbr     = 1 			" show scope in abbreviation and remove the last column
+let OmniCpp_ShowAccess          = 1 
+au  CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+"-------------------------------------------------------------------------
+
+"-------------------------------------------------------------------------
+" plugin - YouCompleteMe.vim 
+" a code-completion engine for vim
+"-------------------------------------------------------------------------
+" Plugin 'Valloric/YouCompleteMe', { 'on': [] }
+
+" 延迟加载
+augroup load_ycm
+	autocmd!
+	autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! load_ycm
+augroup END
+
+let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
+
+" 不显示开启vim时检查ycm_extra_conf文件的信息  
+let g:ycm_confirm_extra_conf = 0
+
+" 开启基于tag的补全，可以在这之后添加需要的标签路径  
+let g:ycm_collect_identifiers_from_tags_files = 1
+
+"注释和字符串中的文字也会被收入补全
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+
+" 输入第2个字符开始补全
+let g:ycm_min_num_of_chars_for_completion = 2
+
+" 禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_cache_omnifunc = 0
+
+" 开启语义补全
+let g:ycm_seed_identifiers_with_syntax = 1
+
+"在注释输入中也能补全
+let g:ycm_complete_in_comments = 1
+
+"在字符串输入中也能补全
+let g:ycm_complete_in_strings = 1
+
+" 设置在下面几种格式的文件上屏蔽ycm
+let g:ycm_filetype_blacklist = {
+			\ 'tagbar' : 1,
+			\ 'nerdtree' : 1,
+			\ 'qf' : 1,
+			\ 'notes' : 1,
+			\ 'markdown' : 1,
+			\ 'unite' : 1,
+			\ 'text' : 1,
+			\ 'vimwiki' : 1,
+			\ 'gitcommit' : 1,
+			\}
+" youcompleteme  默认tab  s-tab 和 ultisnips 冲突
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+
+" 跳转到定义处
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"-----------------------------------------------------------------
+" 文件/文本搜索
+
+"-------------------------------------------------------------------------
+" plugin - ctrlp.vim 
+" Fuzzy file,buffer,mru,tag,etc finder.
+"
+" * <f5> 更新目录缓存。
+" 
+" * <c-f> / <c-b> 在模式之间切换
+" 
+" * <c-d> 在”完整路径匹配“ 和 ”文件名匹配“ 之间切换
+" 
+" * <c-r> 在“字符串模式” 和 “正则表达式模式” 之间切换
+" 
+" * <c-j> / <c-k> 上下移动光标* <c-t> 在新的 tab 打开文件
+" 
+" * <c-v> 垂直分割打开
+" 
+" * <c-x> 水平分割打开
+" 
+" * <c-p>, <c-n> 选择历史记录
+" 
+" * <c-y> 文件不存在时创建文件及目录
+" 
+" * <c-z> 标记/取消标记， 标记多个文件后可以使用 <c-o> 同时打开多个文件
+"-------------------------------------------------------------------------
+" Plug 'ctrlpvim/ctrlp.vim'
+
+" let g:ctrlp_map = '<leader>p'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+" <Leader>f搜索MRU文件
+" nmap <Leader>f :CtrlPMRUFiles<CR>
+
+" <Leader>b显示缓冲区文件，并可通过序号进行跳转
+" nmap <Leader>b :CtrlPBuffer<CR>
+
+" 设置搜索时忽略的文件
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
+
+" 设定工作目录, c,当前文件的目录, r,最近的当前文件,0,禁用该功能
+"let g:ctrlp_working_path_mode = 0
+
+let g:ctrlp_match_window_bottom = 1
+
+" 修改QuickFix窗口显示的最大条目数
+let g:ctrlp_max_height = 15
+let g:ctrlp_match_window_reversed = 0
+
+" 设置MRU最大条目数为500
+let g:ctrlp_mruf_max = 500
+let g:ctrlp_follow_symlinks = 1
+
+" 默认使用全路径搜索，置1后按文件名搜索，准确率会有所提高，可以用<C-d>进行切换
+let g:ctrlp_by_filename = 1
+
+"默认不使用正则表达式，置1改为默认使用正则表达式，可以用<C-r>进行切换
+let g:ctrlp_regexp = 0
+
+"自定义搜索列表的提示符
+let g:ctrlp_line_prefix = '♪ '
+
+
+" 自定义CtrlP使用外部Ag命令
+if executable('ag')
+	set grepprg =ag\ --nogroup\ --nocolor
+	let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+	let g:ctrlp_use_caching = 0
+endif
+
+"-----------------------------------------------------------------
+" plugin - LeaderF
+" An asynchronous fuzzy finder which is used to quickly locate files, buffers,
+" mrus, tags, etc. in large project 模糊查找
+"-----------------------------------------------------------------
+Plugin 'Yggdroot/LeaderF', { 'do': './install.sh' }
+
+" 默认为 <leader>f
+" let g:Lf_ShortcutF = '<c-p>'
+" let g:Lf_ShortcutB = '<m-n>'
+" noremap <c-n> :LeaderfMru<cr>
+" noremap <m-p> :LeaderfFunction!<cr>
+" noremap <m-n> :LeaderfBuffer<cr>
+" noremap <m-m> :LeaderfTag<cr>
+
+noremap <F6> :LeaderfFunction!<cr>
+
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1}
+let g:Lf_WildIgnore = {
+		\ 'dir': ['.svn','.git','.hg'],
+		\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.svn-base']
+		\}
+
+let g:Lf_NormalMap = {
+	\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+	\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+	\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+	\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+	\ }
+
+"-----------------------------------------------------------------
+" plugin - ack.vim
+" A code searching tool, ack, ag
+"-----------------------------------------------------------------
+Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
+
+if executable('ag')
+	let g:ackprg = 'ag --nogroup --nocolor --column'
+endif
+
+" You can configure ag.vim to always start searching from your project root instead of the cwd
+" let g:ag_working_path_mode="r"
+
+"-----------------------------------------------------------------
+
+"-----------------------------------------------------------------
+" plugin - incsearch
+" 高亮所有被搜索文本
+"-----------------------------------------------------------------
+Plugin 'haya14busa/incsearch.vim'
+
+" :h g:incsearch#auto_nohlsearch
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+
+"-------------------------------------------------------------------------
+" plugin - powerline.vim 
+" 设置状态栏主题
+"-------------------------------------------------------------------------
+Plugin 'Lokaltog/vim-powerline'
+set showcmd 						" 显示命令
+set guifont=PowerlineSymbols\ for\ Powerline
+set t_Co=256
+let g:Powerline_symblos = 'fancy'
+"let g:Powerline_symblos = 'powerline'
+"-------------------------------------------------------------------------
+
+"-----------------------------------------------------------------
+" plugin - w0rp/ale.vim
+" Asynchronous Lint Engine 异步语法检查工具
+"-----------------------------------------------------------------
+Plugin 'w0rp/ale'
+
+let g:ale_set_highlights = 0
+
+"自定义error和warning图标
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚡'
+
+"在vim自带的状态栏中整合ale
+let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK']
+
+"显示Linter名称,出错或警告等相关信息
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+"打开文件时不进行检查
+let g:ale_lint_on_enter = 0
+
+"文件内容发生变化时不进行检查
+let g:ale_lint_on_text_changed = 'never'
+
+"普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
+nmap sp <Plug>(ale_previous_wrap)
+nmap sn <Plug>(ale_next_wrap)
+
+"<Leader>s触发/关闭语法检查
+nmap <Leader>s :ALEToggle<CR>
+
+"<Leader>d查看错误或警告的详细信息
+nmap <Leader>d :ALEDetail<CR>
+
+" 使用quickfix显示错误信息而不是loclist
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+
+"使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
+let g:ale_linters = {
+\   'c++': ['gcc'],
+\   'c': ['gcc'],
+\   'python': ['pylint'],
+\}
+
+
+"-----------------------------------------------------------------
+
+"-----------------------------------------------------------------
+" plugin - terryma/vim-multiple-cursors
+" 多光标选择
+"-----------------------------------------------------------------
+Plugin 'terryma/vim-multiple-cursors'
+
+let g:multi_cursor_use_default_mapping = 0
+
+" Default mapping
+let g:multi_cursor_start_word_key      = '<C-n>'
+let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+
+
+
+"-------------------------------------------------------------------------
+
+"-------------------------------------------------------------------------
+" plugin - bash-support.vim 
+"-------------------------------------------------------------------------
+let g:BASH_AuthorName = 'H.M.Yang'
+let g:BASH_Email      = 'hmyang07@gmail.com'
+let g:BASH_Company    = ' '
+"-------------------------------------------------------------------------
+
+"-------------------------------------------------------------------------
+" plugin - man.vim 
+" 采用vim自带的man.vim 
+"-------------------------------------------------------------------------
+":source ~/.vim/ftplugin/man.vim 
+source /usr/share/vim/vim91/ftplugin/man.vim
+"-------------------------------------------------------------------------
+
+
+
+"-------------------------------------------------------------------------
+" plugin - vimwiki.vim 
+" personal wiki 
+"-------------------------------------------------------------------------
+"let g:vimwiki_list = [{'path': '~/vimwiki/',
+"\'path_html': '~/vimwiki/vimwiki_html',
+"\'html_header': '',}]
+
+
+"-------------------------------------------------------------------------
+
+"-----------------------------------------------------------------
+" plugin - vim-flavored-markdown.vim 
+" Markdown syntax highlight using GitHub Flavored Markdown
+"-----------------------------------------------------------------
+augroup markdown
+	au!
+	au BufNewFile,BufRead *.md,*.markdown, setlocal filetype=ghmarkdown
+augroup END
+"-----------------------------------------------------------------
+" plugin - pydiction
+" Python Tab-completion for VIM
+"-----------------------------------------------------------------
+let g:pydiction_location    = '~/.vim/bundle/pydiction/complete-dict'
+let g:pydiction_menu_height = 8
+
+
+
+" Unified color scheme (default: dark)
+" colo seoul256
+"
+" " Light color scheme
+" colo seoul256-light
+"
+" " Switch
+" set background=dark
+" set background=light
+
+" iab xtime <c-r>=strftime('%Y-%m-%d %H:%M:%S')<cr>
+" iab xtime <c-r>=strftime('%Y-%m-%d %H:%M:%S')
+iab <leader>d <c-r>=strftime('%Y-%m-%d %H:%M:%S')
+
